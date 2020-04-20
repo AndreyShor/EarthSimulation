@@ -1,4 +1,4 @@
-package assigment;
+package EarthLIb;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -6,7 +6,7 @@ import java.text.DecimalFormat;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Earth {
+public class  Earth {
     private ArrayList<ArrayList<Double>> arrayOfEarth ;
     private Map<Double, Map<Double, Double>> mapOfEarth;
 
@@ -45,12 +45,23 @@ public class Earth {
             Map<Double, Double> doubleMap = new TreeMap();
 
             Double longitude = Double.parseDouble(stringArr[0]);
-            Double latitude = Double.parseDouble(stringArr[1]);
-            Double meterHigh = Double.parseDouble(stringArr[2]);
 
-            doubleMap.put(latitude, meterHigh);
 
-            this.mapOfEarth.put(longitude, doubleMap);
+            if(this.mapOfEarth.containsKey(longitude)){
+                Double latitude = Double.parseDouble(stringArr[1]);
+                Double meterHigh = Double.parseDouble(stringArr[2]);
+                doubleMap = this.mapOfEarth.get(longitude);
+
+                doubleMap.put(latitude, meterHigh);
+                this.mapOfEarth.put(longitude, doubleMap);
+            } else {
+                Double latitude = Double.parseDouble(stringArr[1]);
+                Double meterHigh = Double.parseDouble(stringArr[2]);
+
+                doubleMap.put(latitude, meterHigh);
+                this.mapOfEarth.put(longitude, doubleMap);
+
+            }
 
         }
         input.close();
